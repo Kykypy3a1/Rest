@@ -13,6 +13,8 @@ public interface UserRepository {
 
     User save(User newUser);
 
+    User edit(User user);
+
     void deleteById(Integer id);
 
     User getById(Integer id);

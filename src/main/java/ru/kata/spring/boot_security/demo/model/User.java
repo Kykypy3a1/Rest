@@ -7,9 +7,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -21,13 +18,11 @@ public class User implements UserDetails {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @NotEmpty(message = "Name should not be empty")
-    @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
     @Column(name = "username")
     private String username;
     @Column(name = "last_name")
     private String lastName;
-    @Min(value = 0, message = "Age should be greater than 0")
+
     @Column(name = "age")
     private int age;
 
@@ -47,6 +42,30 @@ public class User implements UserDetails {
         this.username = name;
         this.lastName = lastName;
         this.age = age;
+    }
+
+    public User(String username, String lastName, int age, String password) {
+        this.username = username;
+        this.lastName = lastName;
+        this.age = age;
+        this.password = password;
+    }
+
+    public User(String username, String lastName, int age, String password, Set<Role> roles) {
+        this.username = username;
+        this.lastName = lastName;
+        this.age = age;
+        this.password = password;
+        this.roles = roles;
+    }
+
+    public User(int id, String username, String lastName, int age, String password, Set<Role> roles) {
+        this.id = id;
+        this.username = username;
+        this.lastName = lastName;
+        this.age = age;
+        this.password = password;
+        this.roles = roles;
     }
 
     public int getId() {
